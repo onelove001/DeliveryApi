@@ -4,12 +4,6 @@ from rest_framework.response import Response
 from . import serializers
 from .models import *
 
-# Create your views here.
-
-class HelloView(generics.GenericAPIView):
-    def get(self, request):
-        return Response(data={"message": "Hello Authentication View"}, status=status.HTTP_200_OK)
-
 
 class UserCreateView(generics.GenericAPIView):
     serializer_class = serializers.UserCreationSerializer
