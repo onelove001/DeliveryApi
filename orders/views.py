@@ -83,3 +83,18 @@ class UserOrderView(generics.GenericAPIView):
         orders = Order.objects.filter(user = user)
         serializer = self.serializer_class(instance = orders, many=True)
         return Response(data = serializer.data, status=status.HTTP_200_OK) 
+
+
+class UserOrderDetail(generics.GenericAPIView):
+    serializer_class = serializers.OrderStatusUpdatedSerializer
+
+    def get(self, request, user_id, order_id):
+        user = User.objects.get(pk = user_id)
+        try: 
+            Order.objects.filter(user = user).get(pk=order_id).exists()
+            print("Exists")
+            Order.objects.filter(user = user).get(pk=order_id)
+            serializer = self.serializer_class(instance = order, many=True)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
