@@ -29,7 +29,8 @@ INSTALLED_APPS = [
 
     #Third Party Apps
     "rest_framework",
-    "djoser"
+    "djoser",
+    "drf_yasg",         
 ]
 
 REST_FRAMEWORK = {
@@ -48,6 +49,16 @@ SIMPLE_JWT = {
      "BLACKLIST_AFTER_ROTATION": False,
 
 }
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}   
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
